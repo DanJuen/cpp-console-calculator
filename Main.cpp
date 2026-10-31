@@ -1,7 +1,7 @@
 #include <iostream>
-#include <limits>
 #include "Berechnungen.h"
 #include "Konsolenfunktionen.h"
+#include <stdexcept>
 
 
 int main()
@@ -20,13 +20,24 @@ int main()
 	std::cout << "Zweite Zahl:";
 	b = zahlEinlesen();
 	
-	std::cout << "Welcher Operator?";
-	std::cin >> x;
+	x = operatorEinlesen();
 
-	causgabe(operatorRechnet(a, b, x));
-	
+	while (true)
+	{
+		try
+		{
+			causgabe(operatorRechnet(a, b, x));
+			break;
+		}
+		catch (const std::runtime_error& e)
+		{
+			std::cout << e.what();
+			b = zahlEinlesen();
+		}
+	}
 
 	k = weiterRechnen();
+
 	}
 }
 

@@ -50,8 +50,6 @@ char weiterRechnen()
 
 double operatorRechnet(double a, double b, char x)
 {
-	while (true)
-	{
 		switch (x)
 		{
 		case '+':
@@ -61,22 +59,25 @@ double operatorRechnet(double a, double b, char x)
 		case '*':
 			return multiplizieren(a, b);
 		case '/':
-			if (b == 0)
-			{
-				while (b == 0)
-				{
-					std::cout << "Gib eine Zahl außer 0 ein.";
-					b = zahlEinlesen();
-				}
-			}
 			return dividieren(a, b);
 		default:
-
-			std::cout << "Ungültiger Operator!!!!!\n";
-			std::cout << "Bitte gültigen Operator eingeben\n";
-			std::cin >> x;
+			std::cerr << "Fehler aufgetreten!\n";
 		}
-	}
 }
 
 //------------------------------------------------------------------------------------------------------------------
+
+char operatorEinlesen()
+{
+	std::cout << "Welcher Operator?";
+	char x;
+	std::cin >> x;
+
+	while (x != '+' && x != '-' && x != '*' && x != '/') 
+	{
+		std::cout << "Ungültiger Operator!\n";
+		std::cout << "Bitte gültigen Operator eingeben\n";
+		std::cin >> x;
+	}
+	return x;
+}
