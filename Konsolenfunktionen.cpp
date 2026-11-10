@@ -2,6 +2,8 @@
 #include <iostream>
 #include <limits>
 #include "Berechnungen.h"
+#include <string>
+#include <sstream>
 
 
 //------------------------------------------------------------------------------------------------------
@@ -15,16 +17,29 @@ void causgabe(double ergebnis)
 
 double zahlEinlesen()
 {
-	double a;
-	std::cin >> a;
-	while (std::cin.fail())
+	while (true)
 	{
-		std::cin.clear();
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		std::cout << "Gebe eine gültige Zahl ein.";
-		std::cin >> a;
+		std::string eingabe;
+		std::getline(std::cin, eingabe);
+		std::istringstream eingabeStrom(eingabe);
+		double zahl;
+		eingabeStrom >> zahl;
+		if (eingabeStrom.fail())
+		{
+			std::cout << "Gebe eine gültige Zahl ein.";
+			continue;
+		}
+
+		eingabeStrom >> std::ws;
+		
+		if (!eingabeStrom.eof())
+		{
+			std::cout << "Gebe eine gültige Zahl ein.";
+			continue;
+		}
+		return zahl;
 	}
-	return a;
+	
 }
 
 //------------------------------------------------------------------------------------------------------
@@ -62,6 +77,7 @@ double operatorRechnet(double a, double b, char x)
 			return dividieren(a, b);
 		default:
 			std::cerr << "Fehler aufgetreten!\n";
+			return -0.0;
 		}
 }
 

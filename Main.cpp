@@ -2,6 +2,7 @@
 #include "Berechnungen.h"
 #include "Konsolenfunktionen.h"
 #include <stdexcept>
+#include <limits>
 
 
 int main()
@@ -37,7 +38,7 @@ int main()
 	}
 
 	k = weiterRechnen();
-
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	}
 }
 
