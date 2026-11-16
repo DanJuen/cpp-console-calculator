@@ -1,44 +1,41 @@
 #include <iostream>
-#include "Berechnungen.h"
 #include "Konsolenfunktionen.h"
 #include <stdexcept>
-#include <limits>
 
 
 int main()
 {
-	char k = 'j';
-	char x;
-	while (k != 'q' && k != 'Q')
+	char fortfahren = 'j';
+	char derOperator;
+	while (fortfahren != 'q' && fortfahren != 'Q')
 	{
-	double a;
-	double b;
+	double ersteZahl;
+	double zweiteZahl;
 	
 
 	std::cout << "Erste Zahl:";
-	a = zahlEinlesen();
+	ersteZahl = zahlEinlesen();
 
 	std::cout << "Zweite Zahl:";
-	b = zahlEinlesen();
+	zweiteZahl = zahlEinlesen();
 	
-	x = operatorEinlesen();
+	derOperator = operatorEinlesen();
 
 	while (true)
 	{
 		try
 		{
-			causgabe(operatorRechnet(a, b, x));
+			causgabe(operatorRechnet(ersteZahl, zweiteZahl, derOperator));
 			break;
 		}
 		catch (const std::runtime_error& e)
 		{
 			std::cout << e.what();
-			b = zahlEinlesen();
+			zweiteZahl = zahlEinlesen();
 		}
 	}
 
-	k = weiterRechnen();
-	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	fortfahren = weiterRechnen();
 	}
 }
 

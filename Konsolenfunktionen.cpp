@@ -1,18 +1,24 @@
 #include "Konsolenfunktionen.h"
 #include <iostream>
-#include <limits>
 #include "Berechnungen.h"
 #include <string>
 #include <sstream>
+#include <stdexcept>
 
 
 //------------------------------------------------------------------------------------------------------
 
 void causgabe(double ergebnis)
 {
-	std::cout << ergebnis;
+	std::cout << ergebnis << '\n';
 }
 
+//------------------------------------------------------------------------------------------------------
+
+void fehlermeldungAusgeben(std::string bezeichnung)
+{
+	std::cout << bezeichnung << " ist ungültig.\n";
+}
 //------------------------------------------------------------------------------------------------------
 
 double zahlEinlesen()
@@ -24,9 +30,10 @@ double zahlEinlesen()
 		std::istringstream eingabeStrom(eingabe);
 		double zahl;
 		eingabeStrom >> zahl;
+
 		if (eingabeStrom.fail())
 		{
-			std::cout << "Gebe eine gültige Zahl ein.";
+			fehlermeldungAusgeben("Die Zahl");
 			continue;
 		}
 
@@ -34,7 +41,7 @@ double zahlEinlesen()
 		
 		if (!eingabeStrom.eof())
 		{
-			std::cout << "Gebe eine gültige Zahl ein.";
+			fehlermeldungAusgeben("Die Zahl");
 			continue;
 		}
 		return zahl;
@@ -46,19 +53,19 @@ double zahlEinlesen()
 
 char weiterRechnen()
 {
-	char k;
 	std::cout << "Wenn du weiter Rechnen möchtest schreibe ein j wenn nicht dann ein q.";
-	std::cin >> k;
 
-	while (k != 'j' && k != 'q' && k != 'Q')
+	while (true)
 	{
-		std::cout << "Das war keine gültige Eingabe.";
-		std::cin.clear();
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		std::cout << "Weiterrechnen?";
-		std::cin >> k;
+		std::string fortfahren;
+		std::getline(std::cin, fortfahren);
+		if (fortfahren.length() != 1 || (fortfahren[0] != 'j' && fortfahren[0] != 'J' && fortfahren[0] != 'q' && fortfahren[0] != 'Q'))
+		{
+			fehlermeldungAusgeben("Das Zeichen");
+			continue;
+		}
+		return fortfahren [0];
 	}
-	return k;
 }
 
 //------------------------------------------------------------------------------------------------------
@@ -76,7 +83,9 @@ double operatorRechnet(double a, double b, char x)
 		case '/':
 			return dividieren(a, b);
 		default:
-			std::cerr << "Fehler aufgetreten!\n";
+
+			throw std::invalid_argument("Falscher Operator!")
+
 			return -0.0;
 		}
 }
@@ -86,14 +95,17 @@ double operatorRechnet(double a, double b, char x)
 char operatorEinlesen()
 {
 	std::cout << "Welcher Operator?";
-	char x;
-	std::cin >> x;
-
-	while (x != '+' && x != '-' && x != '*' && x != '/') 
+	
+	while (true)
 	{
-		std::cout << "Ungültiger Operator!\n";
-		std::cout << "Bitte gültigen Operator eingeben\n";
-		std::cin >> x;
+		std::string operatorEingabe;
+		std::getline(std::cin, operatorEingabe);
+
+		if (operatorEingabe.length() != 1 || (operatorEingabe[0] != '+' && operatorEingabe[0] != '-' && operatorEingabe[0] != '*' && operatorEingabe[0] != '/'))
+		{
+			fehlermeldungAusgeben("Der Operator");
+			continue;
+		}
+		return operatorEingabe[0];
 	}
-	return x;
 }
