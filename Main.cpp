@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Konsolenfunktionen.h"
 #include <stdexcept>
-
+#include "Berechnungen.h"
 
 int main()
 {
@@ -30,8 +30,14 @@ int main()
 		}
 		catch (const std::runtime_error& e)
 		{
-			std::cout << e.what();
+			std::cout << e.what() << '\n';
+			std::cout << "Neue Zahl eingeben!";
 			zweiteZahl = zahlEinlesen();
+		}
+		catch (const std::invalid_argument& e)
+		{
+			std::cout << e.what();
+			derOperator = operatorEinlesen();
 		}
 	}
 

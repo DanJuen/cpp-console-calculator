@@ -1,6 +1,5 @@
 #include "Konsolenfunktionen.h"
 #include <iostream>
-#include "Berechnungen.h"
 #include <string>
 #include <sstream>
 #include <stdexcept>
@@ -15,7 +14,7 @@ void causgabe(double ergebnis)
 
 //------------------------------------------------------------------------------------------------------
 
-void fehlermeldungAusgeben(std::string bezeichnung)
+void fehlermeldungAusgeben(const std::string& bezeichnung)
 {
 	std::cout << bezeichnung << " ist ungültig.\n";
 }
@@ -66,28 +65,6 @@ char weiterRechnen()
 		}
 		return fortfahren [0];
 	}
-}
-
-//------------------------------------------------------------------------------------------------------
-
-double operatorRechnet(double a, double b, char x)
-{
-		switch (x)
-		{
-		case '+':
-			return addieren(a, b);
-		case '-':
-			return subtrahieren(a, b);
-		case '*':
-			return multiplizieren(a, b);
-		case '/':
-			return dividieren(a, b);
-		default:
-
-			throw std::invalid_argument("Falscher Operator!")
-
-			return -0.0;
-		}
 }
 
 //------------------------------------------------------------------------------------------------------------------
