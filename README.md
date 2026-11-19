@@ -19,4 +19,4 @@ Ein einfacher Konsolen-Taschenrechner, den ich mit C++ und Visual Studio entwick
 
 ## Projektstatus
 
-Das Projekt befindet sich in Entwicklung. Ich erweitere es schrittweise, um meine Kenntnisse in C++ und der strukturierten Programmierung zu verbessern.
+Die erste Version des Projekts ist fertiggestellt. Alle implementierten Funktionen wurden erfolgreich getestet. Zukünftige Erweiterungen und Verbesserungen sind möglich.
