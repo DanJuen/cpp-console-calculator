@@ -10,6 +10,8 @@ Ein einfacher Konsolen-Taschenrechner, den ich mit C++ und Visual Studio entwick
 - Behandlung ungültiger Eingaben
 - Prüfung auf Division durch null
 - Möglichkeit, mehrere Berechnungen hintereinander auszuführen
+- Aufteilung des Programms in mehrere Funktionen und Quelldateien
+- Fehlerbehandlung mithilfe von Exceptions (try, catch, throw)
 
 ## Technologien
 
